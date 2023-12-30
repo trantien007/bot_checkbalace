@@ -50,7 +50,7 @@ async function bellDeployAPI(chatId, ownerAddresses, bot) {
   }
 
   const tableHeader = 'Bell\t|\Deploy info Bell\n';
-  const table = `\`\`\`\n${tableHeader}${tableContent}\nTotal\t|\t\n\`\`\``;
+  const table = `\`\`\`\n${tableHeader}\n${tableContent}\t\n\`\`\``;
 
   bot.sendMessage(chatId, table, { parse_mode: 'Markdown' });
 }
