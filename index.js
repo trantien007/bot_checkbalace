@@ -1,6 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import bellAPI from './bellAPI.js';
 import dotenv from 'dotenv';
+import xrpsAPI from './xrpsAPI.js';
 dotenv.config();
 
 const TOKEN = process.env.ACCESS_TOKEN;
@@ -29,5 +30,5 @@ bot.onText(/\/xrps (.+)/, async (msg, match) => {
   }
 
   bot.sendChatAction(chatId, 'typing');
-  await handleAPI(chatId, ownerAddresses, bot, 'xrps');
+  await xrpsAPI(chatId, ownerAddresses, bot);
 });
