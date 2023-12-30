@@ -1,21 +1,11 @@
 import axios from 'axios';
 
-async function handleAPI(chatId, ownerAddresses, bot, key) {
+async function bellAPI(chatId, ownerAddresses, bot, key) {
   let tickInscriptionCount = {};
   let totalInscriptionCount = 0;
 
   for (const ownerAddress of ownerAddresses) {
-    let apiURL = `https://bellsturbo.ordinalswallet.com/wallet/${ownerAddress}/brc20-balance`;
-    
-    switch (key) {
-      case 'bell':
-        apiURL = `https://bellsturbo.ordinalswallet.com/wallet/${ownerAddress}/brc20-balance`;
-        break;
-      case 'xrps':
-        apiURL = `https://bellsturbo.ordinalswallet.com/wallet/${ownerAddress}/brc20-balance`;
-        break;
-    }
-
+    const apiURL = `https://bellsturbo.ordinalswallet.com/wallet/${ownerAddress}/brc20-balance`;
     const params = {
       // start: 1,
       // limit: 100,
@@ -31,7 +21,17 @@ async function handleAPI(chatId, ownerAddresses, bot, key) {
         const arrayData = data || [];
         for (const item of arrayData) {
           const tick = item.ticker;
-          const inscriptionCount = parseInt(item.available_balance || 0);
+          let inscriptionCount = parseInt(item.available_balance || 0);
+
+          switch (tick) {
+            case 'NOOK':
+              inscriptionCount = inscriptionCount / 500000000;
+              break;
+            case 'CRSS':
+            case 'BM2K':
+              inscriptionCount = inscriptionCount / 1000;
+              break;
+          }
 
           tickInscriptionCount[tick] = (tickInscriptionCount[tick] || 0) + inscriptionCount;
           totalInscriptionCount += inscriptionCount;
@@ -57,5 +57,5 @@ async function handleAPI(chatId, ownerAddresses, bot, key) {
   bot.sendMessage(chatId, table, { parse_mode: 'Markdown' });
 }
 
-export default handleAPI;
+export default bellAPI;
 2

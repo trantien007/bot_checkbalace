@@ -1,5 +1,5 @@
 import TelegramBot from 'node-telegram-bot-api';
-import handleAPI from './apiHandler.js';
+import bellAPI from './bellAPI.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,7 +16,7 @@ bot.onText(/\/bell (.+)/, async (msg, match) => {
   }
 
   bot.sendChatAction(chatId, 'typing');
-  await handleAPI(chatId, ownerAddresses, bot, 'bell');
+  await bellAPI(chatId, ownerAddresses, bot);
 });
 
 bot.onText(/\/xrps (.+)/, async (msg, match) => {
