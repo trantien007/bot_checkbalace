@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-async function bellAPI(chatId, ownerAddresses, bot, key) {
+async function bellAPI(chatId, ownerAddresses, bot) {
   let tickInscriptionCount = {};
   let totalInscriptionCount = 0;
-
+  
   for (const ownerAddress of ownerAddresses) {
     const apiURL = `https://bellsturbo.ordinalswallet.com/wallet/${ownerAddress}/brc20-balance`;
     const params = {
