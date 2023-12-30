@@ -29,6 +29,7 @@ async function bellAPI(chatId, ownerAddresses, bot) {
               break;
             case 'CRSS':
             case 'BM2K':
+            case 'MUSK':
               inscriptionCount = inscriptionCount / 1000;
               break;
           }
