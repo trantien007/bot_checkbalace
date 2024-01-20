@@ -68,4 +68,3 @@ async function bellAPI(chatId, ownerAddresses, bot) {
 }
 
 export default bellAPI;
-2
