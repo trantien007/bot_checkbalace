@@ -82,7 +82,8 @@ bot.onText(/\/calc (.+)/, async (msg, match) => {
       bot.sendMessage(chatId, "Vui lòng điền phép tính");
       return;
     }
-    bot.sendMessage(chatId, eval(value));
+    const calc = `🖥 ${value} = ✅ ${eval(value)}`
+    bot.sendMessage(chatId, calc);
   } catch (error) {
     bot.sendMessage(chatId, 'Error Calc');
   }
