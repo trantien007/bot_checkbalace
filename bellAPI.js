@@ -34,6 +34,8 @@ async function bellAPI(chatId, ownerAddresses, bot) {
             case 'CRSS':
             case 'BM2K':
             case 'MUSK':
+            case 'DONG':
+            case '🔔':
               inscriptionCount = inscriptionCount / 1000;
               break;
           }
@@ -50,8 +52,8 @@ async function bellAPI(chatId, ownerAddresses, bot) {
       console.error('Error:', error);
     }
 
-    // Chờ 1.5 giây trước khi thực hiện yêu cầu tiếp theo
-    await delay(1500);
+    // Chờ 1.1 giây trước khi thực hiện yêu cầu tiếp theo
+    await delay(1100);
   }
 
   let tableContent = '';
