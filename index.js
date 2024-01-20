@@ -3,6 +3,7 @@ import bellAPI from "./bellAPI.js";
 import dotenv from "dotenv";
 import xrpsAPI from "./xrpsAPI.js";
 import bellDeployAPI from "./bellDeployAPI.js";
+import drc20API from "./drc20API.js";
 dotenv.config();
 
 const TOKEN = process.env.ACCESS_TOKEN;

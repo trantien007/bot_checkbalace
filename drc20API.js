@@ -8,27 +8,28 @@ async function drc20API(chatId, ownerAddresses, bot) {
     const response = await axios.get(apiUrl);
     if (response.status === 200) {
       const responseData = response.data;
+
       const message =
         `DRC20 - ${responseData.tick}\n\n` +
-        `💰 Price: ${responseData.firstPrice} DOGE\n` +
-        `🔋 Minted: ${responseData.minted}\n` +
-        `👥 Holders: ${responseData.holders}\n\n` +
-        `🚀 Change: ${responseData.change}%\n` +
-        `📊 Volume 24h: $${responseData.volume24h}\n` +
-        `💎 MarketCap: $${responseData.marketcap}\n\n` +
+        `💰 Price: ${(responseData.lastPrice / 100000000).toFixed(2).toLocaleString()} DOGE\n` +
+        `🔋 Minted: ${((responseData.mintedAmt / responseData.max)*100).toFixed(2).toLocaleString()} %\n` +
+        `👥 Holders: ${responseData.holders.toLocaleString()}\n\n` +
+        `🚀 Change: ${responseData.change.toLocaleString()}%\n` +
+        `📊 Volume 24h: Đ${(responseData.volume24h / 100000000).toLocaleString()}\n` +
+        `💎 MarketCap: Đ${(responseData.marketcap / 100000000).toLocaleString()}\n\n` +
         `Powered by @drc20vn`;
 
       // Gửi tin nhắn văn bản
       // bot.sendMessage(msg.chat.id, message);
 
-      const imageUrl = "https://doggy.market/drc-20/oink.jpg";
-      bot.sendPhoto(msg.chat.id, imageUrl, { caption: message });
+      const imageUrl = responseData?.pic ?? null;
+      bot.sendPhoto(chatId, imageUrl, { caption: message });
     }
   } catch (error) {
     console.error("Error:", error);
   }
 
-  bot.sendMessage(chatId, table, { parse_mode: "Markdown" });
+  // bot.sendMessage(chatId, table, { parse_mode: "Markdown" });
 }
 
 export default drc20API;
