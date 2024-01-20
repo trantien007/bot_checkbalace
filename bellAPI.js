@@ -3,6 +3,10 @@ import axios from 'axios';
 async function bellAPI(chatId, ownerAddresses, bot) {
   let tickInscriptionCount = {};
   let totalInscriptionCount = 0;
+
+  async function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
   
   for (const ownerAddress of ownerAddresses) {
     const apiURL = `https://bellsturbo.ordinalswallet.com/wallet/${ownerAddress}/brc20-balance`;
@@ -45,6 +49,9 @@ async function bellAPI(chatId, ownerAddresses, bot) {
     } catch (error) {
       console.error('Error:', error);
     }
+
+    // Chờ 1.5 giây trước khi thực hiện yêu cầu tiếp theo
+    await delay(1500);
   }
 
   let tableContent = '';
